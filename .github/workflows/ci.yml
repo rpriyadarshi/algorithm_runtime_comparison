@@ -1,4 +1,3 @@
-
 name: CI Pipeline
 
 on: [push, pull_request]
@@ -8,12 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v3
 
-    - name: Set up C++
-      uses: actions/setup-cpp@v1
-      with:
-        compiler: gcc
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ libgtest-dev
 
     - name: Configure CMake
       run: cmake -B build -S .
